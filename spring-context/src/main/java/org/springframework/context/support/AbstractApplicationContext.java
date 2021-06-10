@@ -605,7 +605,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			 * 关键点：
 			 * 1、初始化BeanDefinitionReader（BeanDefinitionReader）
 			 * 2、loadBeanDefinitions
-			 * 3、在loadBeanDefinitions过程中 BeanFactory 和 BeanDefinitionReader 反转
+			 * 3、在loadBeanDefinitions过程中 ApplicationContext 和 BeanDefinitionReader 反转
+			 * 4、BeanDefinitionReader 的register是BeanFactory
 			 *
 			 */
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();

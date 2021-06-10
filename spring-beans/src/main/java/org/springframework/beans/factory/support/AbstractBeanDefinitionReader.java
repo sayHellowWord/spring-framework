@@ -217,7 +217,7 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
 	public int loadBeanDefinitions(String location, @Nullable Set<Resource> actualResources) throws BeanDefinitionStoreException {
 
 		/**
-		 * 这个ResourceLoader是BeanFactory，是初始化XmlBeanDefinitionReader时够赞函数入参
+		 * 这个ResourceLoader是ApplicationContext
 		 */
 		ResourceLoader resourceLoader = getResourceLoader();
 		if (resourceLoader == null) {
@@ -228,6 +228,9 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
 		if (resourceLoader instanceof ResourcePatternResolver) {
 			// Resource pattern matching available.
 			try {
+				/**
+				 * 根据文件位置 封装为Resource 对象
+				 */
 				Resource[] resources = ((ResourcePatternResolver) resourceLoader).getResources(location);
 				int count = loadBeanDefinitions(resources);
 				if (actualResources != null) {
