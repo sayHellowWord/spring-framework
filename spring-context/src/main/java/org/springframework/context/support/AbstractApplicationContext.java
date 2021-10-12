@@ -608,6 +608,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			 * 3、在loadBeanDefinitions过程中 ApplicationContext 和 BeanDefinitionReader 反转
 			 * 4、BeanDefinitionReader 的register是BeanFactory
 			 *
+			 * 注意BeanFactory 在全流程的传递
 			 */
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
@@ -622,20 +623,33 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				postProcessBeanFactory(beanFactory);
 
 				StartupStep beanPostProcess = this.applicationStartup.start("spring.context.beans.post-process");
+
 				// Invoke factory processors registered as beans in the context.
+				/**
+				 * 你想在Bean实例化前对BeanFactory进行处理的话实现BeanFactoryPostProcessor
+				 */
 				invokeBeanFactoryPostProcessors(beanFactory);
 
 				// Register bean processors that intercept bean creation.
+				/**
+				 * 在Bean实例化后对Bean进行处理的话
+				 */
 				registerBeanPostProcessors(beanFactory);
 				beanPostProcess.end();
 
 				// Initialize message source for this context.
+				/**
+				 * 国际化资源
+				 */
 				initMessageSource();
 
 				// Initialize event multicaster for this context.
 				initApplicationEventMulticaster();
 
 				// Initialize other special beans in specific context subclasses.
+				/**
+				 * ，如果你想对容器工作过程中发生的节点事件进行一些处理，比如容器要刷新、容器要关闭了，那么你就可以实现ApplicationListener
+				 */
 				onRefresh();
 
 				// Check for listener beans and register them.

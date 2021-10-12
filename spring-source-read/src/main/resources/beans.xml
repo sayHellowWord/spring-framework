@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	   xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<bean class="com.xiaowo.beans.User" id="user">
 		<property name="username" value="javaboy"/>
 		<property name="address" value="www.javaboy.org"/>
 	</bean>
+
+	<bean class="com.xiaowo.beans.MyBeanDefinitonRegistryPostProcessor3" id="myBeanDefinitonRegistryPostProcessor3">
+	</bean>
+
+	<bean class="com.xiaowo.beans.MyBeanDefinitonRegistryPostProcessor2" id="myBeanDefinitonRegistryPostProcessor2">
+	</bean>
+
+	<bean class="com.xiaowo.beans.MyBeanDefinitonRegistryPostProcessor" id="myBeanDefinitonRegistryPostProcessor">
+	</bean>
+
+	<bean class="com.xiaowo.aspect.MyAspect" id="myAspect">
+	</bean>
+
+	<aop:config>
+		<aop:aspect ref="myAspect" order="99">
+			<aop:around method="around" pointcut="execution(public * com.xiaowo..*.*.*(..))"/>
+		</aop:aspect>
+
+	</aop:config>
 </beans>

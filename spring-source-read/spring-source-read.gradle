@@ -7,6 +7,7 @@ version '5.3.9-SNAPSHOT'
 
 dependencies {
     compile(project(":spring-context"))
+    optional("org.aspectj:aspectjweaver")
 }
 
 test {
