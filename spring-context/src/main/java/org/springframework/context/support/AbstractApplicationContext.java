@@ -596,12 +596,13 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		synchronized (this.startupShutdownMonitor) {
 			StartupStep contextRefresh = this.applicationStartup.start("spring.context.refresh");
 
-			// Prepare this context for refreshing.
+			// Prepare this context for refreshing. 为更新准备上下文，设定一些标志
 			prepareRefresh();
 
 			// Tell the subclass to refresh the internal bean factory.
 			/**
-			 * 初始化BeanFactory(DefaultListableBeanFactory)
+			 * 初始化BeanFactory(DefaultListableBeanFactory)【重点：BeanDefinition，类的定义注册到BeanFactory】
+			 *
 			 * 关键点：
 			 * 1、初始化BeanDefinitionReader（BeanDefinitionReader）
 			 * 2、loadBeanDefinitions
@@ -614,7 +615,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 			// Prepare the bean factory for use in this context.
 			/**
-			 * 配置工厂的标准上下文特征
+			 * 配置工厂的标准特征
 			 */
 			prepareBeanFactory(beanFactory);
 
@@ -627,6 +628,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				// Invoke factory processors registered as beans in the context.
 				/**
 				 * 你想在Bean实例化前对BeanFactory进行处理的话实现BeanFactoryPostProcessor
+				 * 比如处理BeanFactory的BeanDefinition
 				 */
 				invokeBeanFactoryPostProcessors(beanFactory);
 
@@ -648,7 +650,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 				// Initialize other special beans in specific context subclasses.
 				/**
-				 * ，如果你想对容器工作过程中发生的节点事件进行一些处理，比如容器要刷新、容器要关闭了，那么你就可以实现ApplicationListener
+				 * 如果你想对容器工作过程中发生的节点事件进行一些处理，比如容器要刷新、容器要关闭了，那么你就可以实现ApplicationListener
 				 */
 				onRefresh();
 
