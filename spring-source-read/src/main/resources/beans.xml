@@ -10,7 +10,7 @@
 		<property name="address" value="www.javaboy.org"/>
 	</bean>
 
-	<bean class="com.xiaowo.beans.MyBeanDefinitonRegistryPostProcessor3" id="myBeanDefinitonRegistryPostProcessor3">
+	<bean class="com.xiaowo.beans.MyBeanDefinitonRegistryPostProcessor3" id="myBeanDefinitonRegistryPostProcessor3" depends-on="user,user">
 	</bean>
 
 	<bean class="com.xiaowo.beans.MyBeanDefinitonRegistryPostProcessor2" id="myBeanDefinitonRegistryPostProcessor2">
